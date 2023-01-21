@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from './../static/banner.png'
+import Logo from '../static/banner.png'
 const styles = {
   content: "max-w-6xl flex-1 flex items-center py-2 justify-between",
   accentedButton: "bg-black text-white py-2 px-4 rounded-full",
