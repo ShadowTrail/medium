@@ -28,7 +28,8 @@ const PostCard = ({ post }) => {
       console.log(
         (await getDoc(doc(db, "users", post.data.author))).data(),
         "helluah"
-      ); 
+      );
+
       setAuthorData((await getDoc(doc(db, "users", post.data.author))).data());
     };
     getAuthorData();

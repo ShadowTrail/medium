@@ -8,6 +8,7 @@ import Qazi from "../static/qazi.jpg";
 import { BiBookmarks } from "react-icons/bi";
 import { FiMoreHorizontal } from "react-icons/fi";
 import Banner from "../static/banner.png";
+import { data } from "autoprefixer";
 
 const styles = {
   wrapper: `flex items-center justify-center flex-[3] border-1 border-r`,
@@ -20,15 +21,15 @@ const styles = {
   listenButton: `flex items-center gap-[.2rem] text-[#1A8917]`,
   socials: `flex gap-[1rem] text-[#787878] cursor-pointer`,
   space: `gap-[.5rem]`,
-  bannerContainer: `h-[18rem] w-full grid center overflow-hidden mb-[2rem]`,
+  bannerContainer: `h-[30rem] w-full grid center overflow-hidden mb-[2rem]`,
   articleMainContainer: "flex flex-col gap-[1rem]",
-  image: "object-cover",
+  image: "object-fill ",
   title: "font-bold text-3xl",
   subtitle: "font-mediumSerifItalic text-[1.4rem] text-[#292929]",
   articleText: "font-mediumSerif text-[1.4rem] text-[#292929]",
   
 };
-const ArticleMain = () => {
+const ArticleMain = ({post, author}) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
@@ -37,15 +38,22 @@ const ArticleMain = () => {
             <div className={styles.authorImagerContainer}>
               <Image
                 className={"object-cover"}
-                src={Qazi}
+                src={`https://res.cloudinary.com/demo/image/fetch/${author?.data?.imageUrl}`}
                 width={100}
                 height={100}
               />
             </div>
             <div className={styles.column}>
-              <div>Shiyii</div>
+              <div>{author?.data?.name}</div>
               <div className={styles.postDetails}>
-                <span>June 15 • 7 min read • </span>
+                <span>
+                  {" "}
+                  {new Date(post?.data?.postedOn).toLocaleString("en-US", {
+                    day: "numeric",
+                    month: "short",
+                  })}
+                  • {post?.data?.postLength} min read •{" "}
+                </span>
                 <span className={styles.listenButton}>
                   <AiFillPlayCircle />
                   Listen
@@ -67,35 +75,24 @@ const ArticleMain = () => {
           <div className={styles.bannerContainer}>
             <Image
               className={styles.image}
-              src={Banner}
-              height={200}
-              width={950}
+              src={`https://res.cloudinary.com/demo/image/fetch/${post?.data?.bannerImage}`}
+              height={500}
+              width={1000}
             />
           </div>
-          <h1 className={styles.title}>
-            How to not waste time on useless coding zzz
-          </h1>
+          <h1 className={styles.title}>{post?.data?.title}</h1>
           <h4 className={styles.subtitle}>
-            <div>Anjali Burman, June 12, 2022</div>
-            <div>Brief: Coding is just a waste of time.</div>
+            <div>
+              {author?.data?.name}.{" "}
+              {new Date(post?.data?.postedOn).toLocaleString("en-US", {
+                day: "numeric",
+                month: "short",
+                year: "numeric"
+              })}
+            </div>
+            <div>{post?.data?.brief}</div>
           </h4>
-          <div className={styles.articleText}>
-            I just wanna waste my time. I just wanna waste time. 'Cause I don't
-            have anything better to do. I just wanna waste my time. I just wanna
-            waste time. 'Cause I don't have anything better to do.I just wanna
-            waste my time. I just wanna waste time. 'Cause I don't have anything
-            better to do. I just wanna waste my time. I just wanna waste time.
-            'Cause I don't have anything better to do. I just wanna waste my
-            time. I just wanna waste time. 'Cause I don't have anything better
-            to do.I just wanna waste my time. I just wanna waste time. 'Cause I
-            don't have anything better to do.I just wanna waste my time. I just
-            wanna waste time. 'Cause I don't have anything better to do.I just
-            wanna waste my time. I just wanna waste time. 'Cause I don't have
-            anything better to do. I just wanna waste my time. I just wanna
-            waste time. 'Cause I don't have anything better to do.I just wanna
-            waste my time. I just wanna waste time. 'Cause I don't have anything
-            better to do.
-          </div>
+          <div className={styles.articleText}>{post?.data?.body}</div>
         </div>
       </div>
     </div>
